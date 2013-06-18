@@ -1,17 +1,10 @@
 <?php
-require_once('classes/iCal.class.php');
-require_once('classes/iCalEvent.class.php');
+require_once('classes/Holidays.class.php');
+require_once('classes/HolidayEvent.class.php');
 
 // Years we want to calculate holidays for
-$years = array(2013, 2014);
-
-$holidaysObj = new Holidays($years);
-foreach($holidaysObj->getHolidays() as $year => $holidays)
-{
-	echo '<h2>' . $year . '</h2>';
-	foreach($holidays as $holiday)
-	{
-		echo $holiday->getEvent() . ' = ' . date('d.m.Y', $holiday->getDate()) . '<br />';
-	}
-}
+$holidaysObj = new Holidays(2013);
+print_r($holidaysObj->getHolidays());
+//$holidaysObj->printOut();
+//$holidaysObj->printiCal();
 ?>

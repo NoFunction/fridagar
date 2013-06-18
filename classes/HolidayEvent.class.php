@@ -1,5 +1,5 @@
 <?php
-class iCalEvent
+class HolidayEvent
 {
 	private $_date;
 	private $_event;

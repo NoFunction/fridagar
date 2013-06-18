@@ -1,15 +1,11 @@
 <?php
-require_once('classes/Holiday.class.php');
-require_once('classes/Holidays.class.php');
 require_once('classes/iCal.class.php');
 require_once('classes/iCalEvent.class.php');
 
-$allYears = explode(',', $_SERVER['QUERY_STRING']);
+// Years we want to calculate holidays for
+$years = array(2013, 2014);
 
-if(count($allYears) > 10)
-	die('Við skulum aðeins hafa okkur hæg.');
-
-$holidaysObj = new Holidays($allYears);
+$holidaysObj = new Holidays($years);
 foreach($holidaysObj->getHolidays() as $year => $holidays)
 {
 	echo '<h2>' . $year . '</h2>';

@@ -22,7 +22,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->getStartDate(1, 1, $year)),
-					'Nýársdagur'
+					'Nýársdagur',
+					true
 				)
 			);
 
@@ -87,7 +88,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->easterDate($year, -3)),
-					'Skírdagur'
+					'Skírdagur',
+					true
 				)
 			);
 
@@ -96,7 +98,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->easterDate($year, -2)),
-					'Föstudagurinn langi'
+					'Föstudagurinn langi',
+					true
 				)
 			);
 
@@ -105,7 +108,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->easterDate($year)),
-					'Páskadagur'
+					'Páskadagur',
+					true
 				)
 			);
 
@@ -114,7 +118,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->easterDate($year, 1)),
-					'Annar í páskum'
+					'Annar í páskum',
+					true
 				)
 			);
 
@@ -125,7 +130,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate(strtotime('+' . $tempDay . ' days', $temp)),
-					'Sumardagurinn fyrsti'
+					'Sumardagurinn fyrsti',
+					true
 				)
 			);
 
@@ -134,7 +140,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->getStartDate(1, 5, $year)),
-					'Verkalýðsdagurinn'
+					'Verkalýðsdagurinn',
+					true
 				)
 			);
 
@@ -143,7 +150,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->easterDate($year, 39)),
-					'Uppstigningardagur'
+					'Uppstigningardagur',
+					true
 				)
 			);
 
@@ -152,7 +160,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->easterDate($year, 49)),
-					'Hvítasunnudagur'
+					'Hvítasunnudagur',
+					true
 				)
 			);
 
@@ -161,7 +170,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->easterDate($year, 50)),
-					'Annar í Hvítasunnu'
+					'Annar í Hvítasunnu',
+					true
 				)
 			);
 
@@ -181,7 +191,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->getStartDate(17, 6, $year)),
-					'Þjóðhátíðardagur'
+					'Þjóðhátíðardagur',
+					true
 				)
 			);
 
@@ -192,7 +203,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate(strtotime('+' . $tempDay . ' days', $temp)),
-					'Frídagur verslunarmanna'
+					'Frídagur verslunarmanna',
+					true
 				)
 			);
 
@@ -221,7 +233,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->getStartDate(24, 12, $year, 13)),
-					'Aðfangadagur'
+					'Aðfangadagur',
+					true
 				)
 			);
 
@@ -230,7 +243,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->getStartDate(25, 12, $year)),
-					'Jóladagur'
+					'Jóladagur',
+					true
 				)
 			);
 
@@ -239,7 +253,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->getStartDate(26, 12, $year)),
-					'Annar í Jólum'
+					'Annar í Jólum',
+					true
 				)
 			);
 
@@ -248,7 +263,8 @@ class Holidays
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->formatDate($this->getStartDate(31, 12, $year, 13)),
-					'Gamlársdagur'
+					'Gamlársdagur',
+					true
 				)
 			);
 		}
@@ -266,7 +282,9 @@ class Holidays
 			echo '<h2>' . $year . '</h2>';
 			foreach($holidays as $holiday)
 			{
-				echo $holiday->getEvent() . ' = ' . $holiday->getStartDate() . '<br />';
+				echo $holiday->getEvent() . ' = ' . $holiday->getStartDate() . ($holiday->isHoliday() ? ' (frídagur)' : '');
+
+				echo '<br />';
 			}
 		}
 	}
@@ -333,11 +351,16 @@ class Holidays
 		{
 			foreach($holidays as $holiday)
 			{
+				$event = $holiday->getEvent();
+
+				if($holiday->isHoliday())
+					$event .= ' [FRÍ]'
+
 				$output .= "BEGIN:VEVENT\r\n";
 				$output .= "DTSTART;VALUE=DATE:" . $this->formatDate($holiday->getStartDate()) . "\r\n";
 				$output .= "DTEND;VALUE=DATE:" . $this->formatDate($holiday->getEndDate()) . "\r\n";
 				$output .= "DTSTAMP:" . $this->formatDate($holiday->getStartDate()) . "T000000Z\r\n";
-				$output .= "SUMMARY:" . $holiday->getEvent() . "\r\n";
+				$output .= "SUMMARY:" . $event . "\r\n";
 				$output .= "END:VEVENT\r\n";
 			}
 		}

@@ -3,11 +3,13 @@ class HolidayEvent
 {
 	private $_date;
 	private $_event;
+	private $_isHoliday;
 
-	public function __construct($date, $event)
+	public function __construct($date, $event, $isHoliday = false)
 	{
 		$this->_date = $date;
 		$this->_event = $event;
+		$this->_isHoliday = $isHoliday;
 	}
 
 	public function getEvent()
@@ -23,6 +25,11 @@ class HolidayEvent
 	public function getEndDate()
 	{
 		return strtotime('+1 day', $this->_date);
+	}
+
+	public function isHoliday()
+	{
+		return $this->_isHoliday;
 	}
 };
 ?>

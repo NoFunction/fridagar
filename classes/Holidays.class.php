@@ -354,7 +354,7 @@ class Holidays
 				$event = $holiday->getEvent();
 
 				if($holiday->isHoliday())
-					$event .= ' [FRÍ]'
+					$event .= ' [FRÍ]';
 
 				$output .= "BEGIN:VEVENT\r\n";
 				$output .= "DTSTART;VALUE=DATE:" . $this->formatDate($holiday->getStartDate()) . "\r\n";

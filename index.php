@@ -10,8 +10,6 @@
 require_once('classes/Holidays.class.php');
 require_once('classes/HolidayEvent.class.php');
 
-// Get holidays for the years 2013, 2014, 2015, 2016
-
 // Get current year
 $curYear = date('Y');
 // Put next 5 years in an array
@@ -23,11 +21,11 @@ $holidays = new Holidays($holidays);
 
 if($_SERVER['QUERY_STRING'] == 'ics')
 {
-	// Set headers
+	// Set headers for calendar format
 	header('Content-type: text/calendar; charset=utf-8');
 	header('Content-Disposition: inline; filename=fridagar.ics');
 
-	// Print out iCalendar for the years 2013, 2014, 2015, 2016
+	// Print out iCalendar
 	$holidays->printiCal();
 }
 elseif($_SERVER['QUERY_STRING'] == 'src')

@@ -345,6 +345,7 @@ class Holidays
 	
 	public function getHolidayEvents()
 	{
+		$oldDateFormat = $this->_dateFormat;
 		$this->_dateFormat = 'Ymd';
 
 		foreach($this->_holidays as $year => $holidays)
@@ -365,6 +366,7 @@ class Holidays
 			}
 		}
 
+		$this->_dateFormat = $oldDateFormat;
 		return $output;
 	}
 	

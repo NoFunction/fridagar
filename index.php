@@ -14,8 +14,8 @@ require_once('classes/HolidayEvent.class.php');
 
 // Get current year
 $curYear = date('Y');
-// Put current year + 5 next years in an array
-for($i = $curYear; $i <= $curYear + 5; $i++)
+// Put next 5 years in an array
+for($i = $curYear; $i < $curYear + 5; $i++)
 	$holidays[] = $i;
 
 // Get the holidays

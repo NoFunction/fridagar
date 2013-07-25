@@ -1,16 +1,16 @@
-fridagar
+# fridagar
 ========
 
 Generate Icelandic holidays and create iCalendar for them, for easy importing to Google Calendar.
 
-# Class usage
+## Class usage
 
 	Holidays ( mixed $years [, string $dateFormat ] )
 	
 - `$years` can both be an `integer` representing a year and an `array` of integers (representing a range of years)
 - `$dateFormat` can be an optional [date format](http://us.php.net/manual/en/function.date.php)
 
-# Getting started
+## Getting started
 
 **Remember to include class libraries**
 
@@ -18,7 +18,7 @@ Generate Icelandic holidays and create iCalendar for them, for easy importing to
 	require_once('classes/Holidays.class.php');
 	require_once('classes/HolidayEvent.class.php');
 	
-# Three output methods
+## Three output methods
 
 - Output text
   - `$holidays->printOut();`
@@ -27,7 +27,7 @@ Generate Icelandic holidays and create iCalendar for them, for easy importing to
 - Output array to a variable
   - `$holidayArr = $holidays->getHolidays();`
 	
-# One year
+## One year
 
 	// Get holidays for the year 2013
 	// Returns UNIX timestamp
@@ -42,7 +42,7 @@ Generate Icelandic holidays and create iCalendar for them, for easy importing to
 	// Print out iCalendar for the year
 	$holidays->printiCal();
 	
-# Multiple years
+## Multiple years
 
 	// Get holidays for the years 2013, 2014, 2015, 2016
 	$holidays = new Holidays(array(2013,2014,2015,2016));
@@ -56,7 +56,7 @@ Generate Icelandic holidays and create iCalendar for them, for easy importing to
 	// Print out iCalendar for the year range
 	$holidays->printiCal();
 	
-# Date formatting
+## Date formatting
 
 	// Get holidays for the year 2013 in the date format "d. M Y"
 	$holidays = new Holidays(2013, 'd. M Y');

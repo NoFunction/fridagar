@@ -7,7 +7,7 @@ Generate Icelandic holidays and create iCalendar for them, for easy importing to
 
 	Holidays ( mixed $years [, string $dateFormat ] )
 	
-- `$years` can both be an `integer` representing a year and an `array` of integers (representing a range of years)
+- `$years` can both be an `integer` (representing one year) and an `array` of integers (representing a range of years)
 - `$dateFormat` can be an optional [date format](http://us.php.net/manual/en/function.date.php)
 
 ## Getting started
@@ -55,6 +55,16 @@ Generate Icelandic holidays and create iCalendar for them, for easy importing to
 
 	// Print out iCalendar for the year range
 	$holidays->printiCal();
+	
+## Working with iCal
+
+When using `printiCal()` method, remember to set `text/calendar` headers before:
+
+	// Make document a calendar file
+	header('Content-type: text/calendar; charset=utf-8');
+	
+	// Optional: To save a filename
+	header('Content-Disposition: inline; filename=fridagar.ics');
 	
 ## Date formatting
 

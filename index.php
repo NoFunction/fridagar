@@ -19,6 +19,17 @@ for($i = $curYear; $i < $curYear + 5; $i++)
 // Get the holidays
 $holidays = new Holidays($holidays);
 
+// Loop through each year
+foreach($holidays->getHolidays() as $years)
+{
+	// Loop through each holiday
+	foreach($years as $holiday)
+	{
+		// Customized output
+		echo $holiday->getEvent() . ' will be: ' . date('d/m/Y', $holiday->getStartDate()) . '<br />';
+	}
+}
+
 if($_SERVER['QUERY_STRING'] == 'ics')
 {
 	// Set headers for calendar format

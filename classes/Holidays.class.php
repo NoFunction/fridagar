@@ -4,6 +4,7 @@ class Holidays
 	private $_years;
 	private $_holidays;
 
+	// Constructor
 	public function __construct($years, $dateFormat = null)
 	{
 		if(!is_array($years))
@@ -12,7 +13,14 @@ class Holidays
 		$this->_years = $years;
 		$this->_holidays = array();
 		$this->_dateFormat = $dateFormat;
-
+		
+		// Parse the year input
+		$this->parse($years);
+	}
+	
+	// Parses all years to holiday event objects
+	private function parse($years)
+	{
 		foreach($years as $year)
 		{
 			$this->_holidays[$year] = array();

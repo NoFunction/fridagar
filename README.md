@@ -25,11 +25,26 @@ Generate Icelandic holidays and create iCalendar for them, for easy importing to
   - `$holidays->printiCal();`
 - Output array to a variable
   - `$holidayArr = $holidays->getHolidays();`
+  
+## Customized text output
+
+	// Get holidays for the year range
+	$holidays = new Holidays(array(2013, 2014, 2015, 2016));
+
+	// Loop through each year
+	foreach($holidays->getHolidays() as $years)
+	{
+		// Loop through each holiday
+		foreach($years as $holiday)
+		{
+			// Customized output for each holiday
+			echo $holiday->getEvent() . ' will be: ' . date('d/m/Y', $holiday->getStartDate()) . '<br />';
+		}
+	}
 	
 ## One year
 
 	// Get holidays for the year 2013
-	// Returns UNIX timestamp
 	$holidays = new Holidays(2013);
 
 	// Get array of the holidays for the year 2013
@@ -66,6 +81,8 @@ When using `printiCal()` method, remember to set `text/calendar` headers before:
 	header('Content-Disposition: inline; filename=fridagar.ics');
 	
 ## Date formatting
+
+**Default format is UNIX timestamp!**
 
 	// Get holidays for the year 2013 in the date format "d. M Y"
 	$holidays = new Holidays(2013, 'd. M Y');

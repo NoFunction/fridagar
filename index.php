@@ -30,7 +30,7 @@ foreach($holidays->getHolidays() as $years)
 	foreach($years as $holiday)
 	{
 		// Customized output
-		//echo $holiday->getEvent() . ' will be: ' . date('d/m/Y', $holiday->getStartDate()) . '<br />';
+		echo $holiday->getEvent() . ' will be: ' . $holiday->getStartDate() . '<br />';
 	}
 }
 

@@ -280,7 +280,16 @@ class Holidays
 
 	public function getHolidays()
 	{
-		return $this->_holidays;
+		foreach($this->_holidays as $year => $holidays)
+		{
+			foreach($holidays as $holiday)
+			{
+				$temp[$year][] = clone $holiday;
+				$temp[$year][count($temp[$year])-1]->setDate($this->formatDate($temp[$year][count($temp[$year])-1]->getStartDate()));
+			}
+		}
+		
+		return $temp;
 	}
 
 	public function printOut()

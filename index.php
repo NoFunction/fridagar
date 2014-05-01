@@ -21,7 +21,7 @@ for($i = $curYear; $i <= $curYear + $yearCount; $i++)
 	$holidays[] = $i;
 
 // Get the holidays
-$holidays = new Holidays($holidays);
+$holidays = new Holidays($holidays, 'd/m/Y');
 
 // Loop through each year
 foreach($holidays->getHolidays() as $years)
@@ -30,7 +30,7 @@ foreach($holidays->getHolidays() as $years)
 	foreach($years as $holiday)
 	{
 		// Customized output
-		echo $holiday->getEvent() . ' will be: ' . date('d/m/Y', $holiday->getStartDate()) . '<br />';
+		//echo $holiday->getEvent() . ' will be: ' . date('d/m/Y', $holiday->getStartDate()) . '<br />';
 	}
 }
 

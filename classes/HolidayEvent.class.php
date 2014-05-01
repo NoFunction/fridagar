@@ -26,6 +26,11 @@ class HolidayEvent
 	{
 		return strtotime('+1 day', $this->_date);
 	}
+	
+	public function setDate($date)
+	{
+		$this->_date = $date;
+	}
 
 	public function isHoliday()
 	{

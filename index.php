@@ -13,11 +13,11 @@ require_once('classes/HolidayEvent.class.php');
 // Get current year
 $curYear = date('Y');
 
-// How many years we want, if more than 50 we set default to 5
-$years = is_numeric($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] <= 50 ? $_SERVER['QUERY_STRING'] : 5;
+// How many years we want, if more than 100 we set default to 5
+$yearCount = is_numeric($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] <= 100 ? $_SERVER['QUERY_STRING'] : 5;
 
 // Put next 5 years in an array
-for($i = $curYear; $i < $curYear + $years; $i++)
+for($i = $curYear; $i <= $curYear + $yearCount; $i++)
 	$holidays[] = $i;
 
 // Get the holidays

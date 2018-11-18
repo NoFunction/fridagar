@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('Europe/London');
+date_default_timezone_set('Iceland');
 class Holidays
 {
 	private $_years;
@@ -26,31 +26,31 @@ class Holidays
 		{
 			$this->_holidays[$year] = array();
 
-			// NÃ½Ã¡rsdagur
+			// Nýársdagur
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->getStartDate(1, 1, $year),
-					'NÃ½Ã¡rsdagur',
+					'Nýársdagur',
 					true
 				)
 			);
 
-			// ÃžrÃ©ttÃ¡ndi
+			// Þréttándi
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->getStartDate(6, 1, $year),
-					'ÃžrettÃ¡ndinn'
+					'Þrettándinn'
 				)
 			);
 
-			// BÃ³ndadagur
+			// Bóndadagur
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
-					$this->winterDate($year, 13, 4),
-					'BÃ³ndadagur'
+					$this->winterDate($year, 13, 5),
+					'Bóndadagur'
 				)
 			);
 
@@ -74,12 +74,12 @@ class Holidays
 				)
 			);
 
-			// Ã–skudagur
+			// Öskudagur
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					strtotime('-' . ($tempDay-2) . ' days', $temp),
-					'Ã–skudagur'
+					'Öskudagur'
 				)
 			);
 
@@ -87,53 +87,53 @@ class Holidays
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
-					$this->winterDate($year, 18, 6),
+					$this->winterDate($year, 18, 7),
 					'Konudagur'
 				)
 			);
 
-			// SkÃ­rdagur
+			// Skírdagur
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->easterDate($year, -3),
-					'SkÃ­rdagur',
+					'Skírdagur',
 					true
 				)
 			);
 
-			// FÃ¶studagurinn langi
+			// Föstudagurinn langi
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->easterDate($year, -2),
-					'FÃ¶studagurinn langi',
+					'Föstudagurinn langi',
 					true
 				)
 			);
 
-			// PÃ¡skadagur
+			// Páskadagur
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->easterDate($year),
-					'PÃ¡skadagur',
+					'Páskadagur',
 					true
 				)
 			);
 
-			// Annar Ã­ pÃ¡skum
+			// Annar í páskum
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->easterDate($year, 1),
-					'Annar Ã­ pÃ¡skum',
+					'Annar í páskum',
 					true
 				)
 			);
 
 			// Sumardagurinn fyrsti
-			$temp = $this->getStartdate(18, 4, $year);
+			$temp = $this->getStartdate(19, 4, $year);
 			$tempDay = (7 - date('N', $temp) + 4) % 7;
 			array_push(
 				$this->_holidays[$year],
@@ -144,12 +144,12 @@ class Holidays
 				)
 			);
 
-			// VerkalÃ½Ã°sdagurinn
+			// Verkalýðsdagurinn
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->getStartDate(1, 5, $year),
-					'VerkalÃ½Ã°sdagurinn',
+					'Verkalýðsdagurinn',
 					true
 				)
 			);
@@ -164,55 +164,60 @@ class Holidays
 				)
 			);
 
-			// HvÃ­tasunnudagur
+			// Hvítasunnudagur
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->easterDate($year, 49),
-					'HvÃ­tasunnudagur',
+					'Hvítasunnudagur',
 					true
 				)
 			);
 
-			// Annar Ã­ HvÃ­tasunnu
+			// Annar í Hvítasunnu
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->easterDate($year, 50),
-					'Annar Ã­ HvÃ­tasunnu',
+					'Annar í Hvítasunnu',
 					true
 				)
 			);
 
-			// SjÃ³mannadagurinn
+			// Sjómannadagurinn
 			$temp = $this->getStartdate(1, 6, $year);
 			$tempDay = (7 - date('N', $temp)) % 7;
+			$tempTime = strtotime('+' . $tempDay . ' days', $temp);
+			$easterSunday = $this->easterDate($year, 49);
+			if (date('dm', $easterSunday) == date('dm', $tempTime)) {
+				$tempDay += 7;
+			}
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					strtotime('+' . $tempDay . ' days', $temp),
-					'SjÃ³mannadagurinn'
+					'Sjómannadagurinn'
 				)
 			);
 
-			// ÃžjÃ³Ã°hÃ¡tÃ­Ã°ardagur
+			// Þjóðhátíðardagur
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->getStartDate(17, 6, $year),
-					'ÃžjÃ³Ã°hÃ¡tÃ­Ã°ardagur',
+					'Þjóðhátíðardagur',
 					true
 				)
 			);
 
-			// FrÃ­dagur verslunarmanna
+			// Frídagur verslunarmanna
 			$temp = $this->getStartdate(1, 8, $year);
 			$tempDay = (7 - date('N', $temp) + 1) % 7;
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					strtotime('+' . $tempDay . ' days', $temp),
-					'FrÃ­dagur verslunarmanna',
+					'Frídagur verslunarmanna',
 					true
 				)
 			);
@@ -228,51 +233,51 @@ class Holidays
 				)
 			);
 
-			// ÃžorlÃ¡ksmessa
+			// Þorláksmessa
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->getStartDate(23, 12, $year),
-					'ÃžorlÃ¡ksmessa'
+					'Þorláksmessa'
 				)
 			);
 
-			// AÃ°fangadagur
+			// Aðfangadagur
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->getStartDate(24, 12, $year, 13),
-					'AÃ°fangadagur',
+					'Aðfangadagur',
 					true
 				)
 			);
 
-			// JÃ³ladagur
+			// Jóladagur
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->getStartDate(25, 12, $year),
-					'JÃ³ladagur',
+					'Jóladagur',
 					true
 				)
 			);
 
-			// Annar Ã­ JÃ³lum
+			// Annar í Jólum
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->getStartDate(26, 12, $year),
-					'Annar Ã­ JÃ³lum',
+					'Annar í Jólum',
 					true
 				)
 			);
 
-			// GamlÃ¡rsdagur
+			// Gamlársdagur
 			array_push(
 				$this->_holidays[$year],
 				new HolidayEvent(
 					$this->getStartDate(31, 12, $year, 13),
-					'GamlÃ¡rsdagur',
+					'Gamlársdagur',
 					true
 				)
 			);
@@ -281,6 +286,7 @@ class Holidays
 
 	public function getHolidays()
 	{
+		$temp = [];
 		foreach($this->_holidays as $year => $holidays)
 		{
 			foreach($holidays as $holiday)
@@ -300,7 +306,7 @@ class Holidays
 			echo '<h2>' . $year . '</h2>';
 			foreach($holidays as $holiday)
 			{
-				echo $holiday->getEvent() . ' = ' . $this->formatDate($holiday->getStartDate()) . ($holiday->isHoliday() ? ' (frÃ­dagur)' : '');
+				echo $holiday->getEvent() . ' = ' . $this->formatDate($holiday->getStartDate()) . ($holiday->isHoliday() ? ' (frídagur)' : '');
 
 				echo '<br />';
 			}
@@ -319,7 +325,7 @@ class Holidays
 
 	private function getStartDate($day, $month, $year, $hour = 0)
 	{
-		return mktime(0, 0, $hour, $month, $day, $year);
+		return gmmktime($hour, 0, 0, $month, $day, $year);
 	}
 
 	private function easterDate($year, $offset = null)
@@ -346,11 +352,12 @@ class Holidays
 
 	private function winterDate($year, $offset, $day)
 	{
-		$days = $offset * 7;
 		$winterDate = $this->getStartDate(21, 10, $year - 1);
-		$winterDay = ((7 - date('N', $winterDate) + 1) + $day) % 7;
-		$winterDay = strtotime('+' . ($days + $winterDay) . ' days', $winterDate);
-
+		$days = ($offset * 7) + ((7 + 6 - date('N', $winterDate)) % 7) - ((7 + 6 - $day) % 7);
+		if ((bool) date('L', strtotime('01.01.' . $year)) && (int) date('N', strtotime('30.12.' . ($year - 1))) == 6) {
+			$days += 7;
+		}
+		$winterDay = strtotime('+' . $days . ' days', $winterDate);
 		return $winterDay;
 	}
 
@@ -373,7 +380,7 @@ class Holidays
 				$event = $holiday->getEvent();
 
 				if($holiday->isHoliday())
-					$event .= ' [FRÃ]';
+					$event .= ' [FRÍ]';
 
 				$output .= "BEGIN:VEVENT\r\n";
 				$output .= "DTSTART;VALUE=DATE:" . $this->formatDate($holiday->getStartDate()) . "\r\n";
